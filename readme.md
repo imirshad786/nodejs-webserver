@@ -225,13 +225,7 @@ Press `Ctrl+C` in the terminal to gracefully shutdown the server.
 ![Home Page](https://via.placeholder.com/800x400?text=Home+Page+Screenshot)
 
 ### About Page
-![About Page](https://via.placeholder.com/800x400?text=About+Page+Screenshot)
-
-### Contact Page
-![Contact Page](https://via.placeholder.com/800x400?text=Contact+Page+Screenshot)
-
-### 404 Error Page
-![404 Page](https://via.placeholder.com/800x400?text=404+Error+Page+Screenshot)
+![Running Server](https://via.placeholder.com/800x400?text=About+Page+Screenshot)
 
 ---
 
