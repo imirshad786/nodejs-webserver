@@ -221,11 +221,17 @@ Press `Ctrl+C` in the terminal to gracefully shutdown the server.
 
 ## 📸 Screenshots
 
+### Server Running on port 3000
+![Running Server](public/screenshot/server.png)
+
 ### Home Page
-![Home Page](https://via.placeholder.com/800x400?text=Home+Page+Screenshot)
+![Home Page](public/screenshot/home.png)
 
 ### About Page
-![Running Server](https://via.placeholder.com/800x400?text=About+Page+Screenshot)
+![About Page](public/screenshot/about.png)
+
+### Contact Page
+![Contact Page](public/screenshot/contact.png)
 
 ---
 

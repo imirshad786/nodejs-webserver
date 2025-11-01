@@ -95,13 +95,8 @@ body {
 
 .washing-machine {
   font-size: 15rem;
-  animation: bounce 2s infinite;
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
 
 /* Buttons */
 .btn {
@@ -160,10 +155,6 @@ body {
   transition: all 0.3s;
 }
 
-.feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
 
 .feature-icon {
   font-size: 3rem;
