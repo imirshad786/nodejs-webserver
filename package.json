@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "chalk": "^5.6.2"
+  },
+  "name": "assignment6",
+  "version": "1.0.0",
+  "description": "A professional web server built with Node.js HTTP module, featuring a complete laundry service website with multiple routes, custom error handling, and modern responsive design.",
+  "main": "server.js",
+  "type": "commonjs",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Arshad Coders",
+  "license": "ISC"
+}
