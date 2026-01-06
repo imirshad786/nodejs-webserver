@@ -144,6 +144,9 @@ The server logs all incoming requests:
 ### Contact Page
 ![Contact Page](public/screenshot/contact.png)
 
+### 404 Page
+![404 Page](public/screenshot/404.png)
+
 ---
 
 ## ✅ Assignment Requirements
