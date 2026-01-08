@@ -29,8 +29,6 @@ This is a custom web server built from scratch using Node.js's built-in `http` m
 - **Runtime:** Node.js (v14.0.0 or higher)
 - **Core Modules:**
   - `http` - Web server creation
-  - `fs/promises` - Asynchronous file operations
-  - `path` - File path handling
 - **Frontend:**
   - HTML5
   - CSS3 (with Flexbox & Grid)
@@ -45,14 +43,9 @@ nodejs-web-server/
 │
 ├── server.js              # Main server file
 │
-├── pages/                 # HTML pages directory
-│   ├── home.html         # Home page
-│   ├── about.html        # About page
-│   ├── contact.html      # Contact page
-│   └── 404.html          # 404 Error page
 │
 ├── public/               # Static assets directory
-│   └── styles.css        # Main stylesheet
+│   └── screenshot        # Pages Screenshot
 │
 ├── package.json          # Project metadata
 └── README.md            # Project documentation
