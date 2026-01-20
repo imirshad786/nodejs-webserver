@@ -6,259 +6,258 @@ const server = http.createServer((req, res) => {
 
   res.write(`<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home - Laundry Mart</title>
-  <style>
-  * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laundry Wallah / Laundry Mart Hero</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background: #f5f7fa;
-}
+      html{
+        scroll-behavior: smooth;
+      }
 
-/* Navbar */
-.navbar {
-  background: #667eea;
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 5%;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .logo {
+        color: #434343;
+        letter-spacing: 0.025rem;
+        font-size: 24px;
+      }
+
+    
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 1000;
+      }
+
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background-color: #434343;
+        transition: all 0.3s ease;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
+      nav ul {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      nav ul li {
+        position: relative;
+        list-style: none;
+        padding-bottom: 5px;
+      }
+      nav ul li a{
+        text-decoration: none;
+        color: #434343;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .nav-items::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        border-radius: 2px;
+        background-color: #1985de;
+        transition: width 0.3s ease;
+        transform: translateX(-100%);
+      }
+
+      .nav-items::after {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 49%;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        border-radius: 2px;
+        background-color: #1985de;
+        transition: width 0.3s ease;
+        transform: translateX(0);
+      }
+
+      .nav-items:hover::before,
+      .nav-items:hover::after {
+        width: 50%;
+      }
+
+      .user-btn {
+        border: none;
+        outline: none;
+        padding: 12px 20px;
+        background-color: #19c4de25;
+        color: #1985de;
+        font-weight: 600;
+        letter-spacing: 0.02rem;
+        border-radius: 10px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .hero-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #f8f6f6;
+        min-height: calc(100vh - 80px);
+        padding: 5%;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+
+      .left-side {
+        flex: 1;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .left-side h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        color: #434343;
+        line-height: 1.2;
+      }
+
+      .left-side h1 span {
+        color: #1985de;
+      }
+
+      .left-side p {
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        color: #666666;
+        line-height: 1.6;
+      }
+
+      .cta-btn {
+        width: fit-content;
+        padding: 15px 25px;
+        border: none;
+        outline: none;
+        background-color: #1985de;
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(25, 133, 222, 0.3);
+      }
+
+      .right-side {
+        flex: 1;
+        min-width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .laundy-image {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+      }
+
+      #our-archivements {
+        display: flex;
+        align-items: center;
+        background-color: #1985de;
+        color: white;
+        padding: 40px 5%;
+      }
+
+      #our-archivements h2 {
+        text-align: center;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        margin-bottom: 30px;
+      }
+
+      .archivements-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .archive-items {
+        text-align: center;
+      }
+
+      .archive-items h3 {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        margin-bottom: 10px;
+      }
+
+      .archive-items p {
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+      }
+
+      #about {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+        padding: 50px 5%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      
+.footer {
+  background: #2d3748;
   color: white;
-  padding: 1rem 0;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 1.8rem;
-  font-weight: 700;
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  background: rgba(255,255,255,0.2);
-}
-
-/* Hero Section */
-.hero-section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-  min-height: calc(100vh - 200px);
-}
-
-.hero-title {
-  font-size: 3rem;
-  color: #667eea;
-  margin-bottom: 1rem;
-  line-height: 1.2;
-}
-
-.hero-subtitle {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 2rem;
-  line-height: 1.8;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 1rem;
-}
-
-.hero-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.washing-machine {
-  font-size: 15rem;
-}
-
-
-/* Buttons */
-.btn {
-  display: inline-block;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s;
-  cursor: pointer;
-  border: none;
-  font-size: 1rem;
-}
-
-.btn-primary {
-  background: #667eea;
-  color: white;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-}
-
-.btn-secondary {
-  background: white;
-  color: #667eea;
-  border: 2px solid #667eea;
-}
-
-.btn-secondary:hover {
-  background: #667eea;
-  color: white;
-}
-
-.btn-full {
-  width: 100%;
-}
-
-/* Features */
-.features {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.feature-card {
-  background: white;
+  text-align: center;
   padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  transition: all 0.3s;
+  margin-top: 3rem;
 }
 
-
-.feature-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-  color: #667eea;
-  margin-bottom: 0.5rem;
-}
-
-/* Content Section */
-.content-section {
-  min-height: calc(100vh - 200px);
-  padding: 3rem 0;
-}
-
-.content-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.page-title {
-  font-size: 2.5rem;
-  color: #667eea;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.page-subtitle {
-  text-align: center;
-  color: #666;
-  font-size: 1.2rem;
-  margin-bottom: 3rem;
-}
-
-/* About Content */
-.about-content {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 3rem;
-  margin-top: 2rem;
-}
-
-.about-text {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-
-.about-text h2 {
-  color: #667eea;
-  margin: 1.5rem 0 1rem 0;
-}
-
-.about-text h2:first-child {
-  margin-top: 0;
-}
-
-.features-list {
-  list-style: none;
-  margin-top: 1rem;
-}
-
-.features-list li {
-  padding: 0.5rem 0;
-  font-size: 1.1rem;
-}
-
-.stats-grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.stat-card {
-  background: #667eea;
-  color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.stat-card h3 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-/* Contact Grid */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -274,7 +273,7 @@ body {
 }
 
 .contact-info h2 {
-  color: #667eea;
+  color: #1985de;
   margin-bottom: 1rem;
 }
 
@@ -294,7 +293,7 @@ body {
 }
 
 .contact-item h3 {
-  color: #667eea;
+  color: #1985de;
   margin-bottom: 0.3rem;
 }
 
@@ -319,8 +318,6 @@ body {
 .social-icons a:hover {
   transform: scale(1.2);
 }
-
-/* Contact Form */
 .contact-form-container {
   background: white;
   padding: 2rem;
@@ -358,73 +355,8 @@ body {
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #1985de;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-/* Services Grid */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.service-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  transition: all 0.3s;
-  text-align: center;
-}
-
-.service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.service-icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-}
-
-.service-card h3 {
-  color: #667eea;
-  margin-bottom: 0.5rem;
-  font-size: 1.5rem;
-}
-
-.service-price {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #764ba2;
-  margin: 1rem 0;
-}
-
-.service-features {
-  list-style: none;
-  margin-top: 1rem;
-  text-align: left;
-}
-
-.service-features li {
-  padding: 0.3rem 0;
-  color: #666;
-}
-
-.cta-section {
-  text-align: center;
-  margin-top: 4rem;
-  padding: 3rem 2rem;
-  background: #667eea;
-  border-radius: 12px;
-  color: white;
-}
-
-.cta-section h2 {
-  margin-bottom: 1.5rem;
-  font-size: 2rem;
 }
 
 /* Error Section */
@@ -442,7 +374,7 @@ body {
 
 .error-code {
   font-size: 8rem;
-  color: #667eea;
+  color: #1985de;
   font-weight: 700;
   margin-bottom: 1rem;
 }
@@ -471,52 +403,120 @@ body {
   justify-content: center;
 }
 
-/* Footer */
-.footer {
-  background: #2d3748;
-  color: white;
-  text-align: center;
-  padding: 2rem;
-  margin-top: 3rem;
-}
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .hero-section {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 2rem 1rem;
-  }
+        nav {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 70%;
+          height: 100vh;
+          background: white;
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+          transition: right 0.3s ease;
+          z-index: 999;
+          padding: 80px 20px 20px;
+        }
 
-  .hero-title {
-    font-size: 2rem;
-  }
+        nav.active {
+          right: 0;
+        }
 
-  .hero-buttons {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+        nav ul {
+          flex-direction: column;
+          gap: 2rem;
+          align-items: flex-start;
+        }
 
-  .washing-machine {
-    font-size: 8rem;
-  }
+        nav ul li {
+          font-size: 18px;
+        }
 
-  .nav-links {
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+        .user-btn {
+          margin-top: 20px;
+        }
 
-  .about-content,
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
+        .hero-section {
+          flex-direction: column;
+          text-align: center;
+          padding: 10% 5%;
+        }
 
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
+        .left-side {
+          align-items: center;
+        }
 
-  .error-code {
+        .cta-btn {
+          align-self: center;
+        }
+
+        #book-services {
+          grid-template-columns: 1fr;
+          padding: 2rem 3%;
+        }
+
+        table {
+          font-size: 12px;
+        }
+
+        th,
+        td {
+          padding: 8px 4px;
+        }
+
+        .service-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .service-btn {
+          align-self: flex-end;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        header {
+          padding: 15px 3%;
+        }
+
+        .hero-section {
+          padding: 5% 3%;
+        }
+
+        #book-services {
+          padding: 2rem 3%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .logo {
+          font-size: 20px;
+        }
+
+        .user-btn {
+          display: none;
+        }
+
+        .left-side h1 {
+          font-size: 1.8rem;
+        }
+
+        #our-archivements {
+          flex-direction: column;
+        }
+
+        .archivements-list {
+          grid-template-columns: 1fr;
+        }
+
+        #about {
+          grid-template-columns: 1fr;
+        }
+
+        .error-code {
     font-size: 5rem;
   }
 
@@ -528,112 +528,121 @@ body {
     flex-direction: column;
     width: 100%;
   }
-}
-  </style>
-</head>
-<body>
-  <nav class="navbar">
-    <div class="nav-container">
-      <h1 class="logo">🧺 LaundryMart</h1>
-      <ul class="nav-links">
-        <li><a href="/" class="active">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>`);
+
+      }
+    </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  </head>
+
+  <body>
+    <header>
+      <h2 class="logo">LaundryMart</h2>
+
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <nav id="navMenu">
+        <ul class="nav-list">
+          <li class="nav-items"><a href="/">Home</a></li>
+          <li class="nav-items"><a href="about">About Us</a></li>
+          <li class="nav-items"><a href="contact">Contact Us</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="user-btn">Username</button>
+    </header>`);
   
   if (req.url == "/" && req.method == "GET") {
     res.write(`
-
-  <main class="hero-section">
-    <div class="hero-content">
-      <h1 class="hero-title">Fresh Clothes, Zero Hassle</h1>
-      <p class="hero-subtitle">
-        Welcome to LaundryMart - Your trusted partner for premium laundry services.
-        We provide doorstep pickup and delivery with eco-friendly cleaning solutions.
-      </p>
-      <div class="hero-buttons">
-        <a href="/services" class="btn btn-primary">Our Services</a>
-        <a href="/contact" class="btn btn-secondary">Contact Us</a>
+<section class="hero-section" id="home">
+      <div class="left-side">
+        <h1>
+          Fresh Clothes Zero Hassle Every Time <span>Laundry Services</span>
+        </h1>
+        <p>
+          Experience premium laundry care with Laundry Wallah / Laundry Mart —
+          your one-stop solution for washing, dry cleaning, and ironing. Enjoy
+          doorstep pickup and delivery, eco-friendly cleaning, and fast
+          turnaround — all at affordable prices. Save time, stay fresh, and let
+          us handle the laundry while you focus on what matters most.
+        </p>
+        <button type="button" onclick="window.location.href = '#book-services'" class="cta-btn">Book a Service Today</button>
       </div>
-    </div>
-    <div class="hero-image">
-      <div class="washing-machine">🧺</div>
-    </div>
-  </main>
+      <div class="right-side">
+        <img
+          src="https://png.pngtree.com/png-clipart/20250608/original/pngtree-cartoon-style-blue-washing-machine-3d-render-on-transparent-background-png-image_21138860.png"
+          alt="laundy-image"
+          class="laundy-image"
+        />
+      </div>
+    </section>
 
-  <section class="features">
-    <div class="feature-card">
-      <div class="feature-icon">🚚</div>
-      <h3>Free Pickup & Delivery</h3>
-      <p>Convenient doorstep service at your time</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-      <h3>Fast Turnaround</h3>
-      <p>Get your clothes back within 24 hours</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🌿</div>
-      <h3>Eco-Friendly</h3>
-      <p>Safe cleaning products for you and planet</p>
-    </div>
-  </section> `);
+    <section id="our-archivements">
+      <h2>Our Achievements</h2>
+      <div class="archivements-list">
+        <div class="archive-items">
+          <h3>15+</h3>
+          <p>laundry services</p>
+        </div>
+        <div class="archive-items">
+          <h3>250+</h3>
+          <p>happy customers</p>
+        </div>
+        <div class="archive-items">
+          <h3>2+</h3>
+          <p>years of experience</p>
+        </div>
+      </div>
+    </section>
+  `);
   } else if (req.url == "/about" && req.method == "GET") {
     res.write(`
-  <main class="content-section">
-    <div class="content-container">
-      <h1 class="page-title">About LaundryMart</h1>
-      
-      <div class="about-content">
-        <div class="about-text">
-          <h2>Our Story</h2>
-          <p>
-            Founded in 2023, LaundryMart has been serving the community with 
-            premium laundry services. We understand the value of your time and 
-            the importance of clean, fresh clothes in your daily life.
-          </p>
-          
-          <h2>Our Mission</h2>
-          <p>
-            To provide hassle-free, eco-friendly laundry services that save our 
-            customers' time while delivering exceptional quality. We're committed 
-            to making laundry day the easiest part of your week.
-          </p>
-
-          <h2>Why Choose Us?</h2>
-          <ul class="features-list">
-            <li>✅ 2+ years of experience in laundry services</li>
-            <li>✅ 250+ satisfied customers</li>
-            <li>✅ Eco-friendly cleaning products</li>
-            <li>✅ Professional trained staff</li>
-            <li>✅ State-of-the-art equipment</li>
-            <li>✅ Affordable pricing with no hidden charges</li>
-          </ul>
-        </div>
-
-        <div class="stats-grid">
-          <div class="stat-card">
-            <h3>250+</h3>
-            <p>Happy Customers</p>
-          </div>
-          <div class="stat-card">
-            <h3>15+</h3>
-            <p>Services Offered</p>
-          </div>
-          <div class="stat-card">
-            <h3>2+</h3>
-            <p>Years Experience</p>
-          </div>
-          <div class="stat-card">
-            <h3>24hr</h3>
-            <p>Quick Turnaround</p>
-          </div>
-        </div>
+  <section id="about">
+      <div class="service-box">
+        <img
+          width="64"
+          height="64"
+          src="https://img.icons8.com/wired/64/washing-machine.png"
+          alt="washing-machine"
+        />
+        <h3>Premium Services</h3>
+        <p>Professional washing services for all types of fabrics.</p>
       </div>
-    </div>
-  </main> `);
+      <div class="service-box">
+        <img
+          width="64"
+          height="64"
+          src="https://img.icons8.com/?size=100&id=47806&format=png&color=000000"
+          alt="dry-cleaning--v1"
+        />
+        <h3>Quick Support</h3>
+        <p>Expert customer support to keep your clothes looking their best.</p>
+      </div>
+      <div class="service-box">
+        <img
+          width="64"
+          height="64"
+          src="https://img.icons8.com/?size=100&id=44361&format=png&color=000000"
+          alt="ironing"
+        />
+        <h3>Hassle Free Delivery</h3>
+        <p>Professional delivery for a crisp and polished appearance.</p>
+      </div>
+      <div class="service-box">
+        <img
+          width="64"
+          height="64"
+          src="https://img.icons8.com/?size=100&id=siKebiDAvcub&format=png&color=000000"
+          alt="affordable"
+        />
+        <h3>Affordable Price</h3>
+        <p>Affordable price for cleaning and drying clothes in our company.</p>
+      </div>
+    </section> `);
   } else if (req.url == "/contact" && req.method == "GET") {
     res.write(`
   <main class="content-section">
@@ -647,7 +656,7 @@ body {
           
           <div class="contact-details">
             <div class="contact-item">
-              <span class="contact-icon">📍</span>
+              <span class="contact-icon"></span>
               <div>
                 <h3>Address</h3>
                 <p>123 Clean Street, Mumbai, IN 400001</p>
@@ -655,7 +664,7 @@ body {
             </div>
             
             <div class="contact-item">
-              <span class="contact-icon">📞</span>
+              <span class="contact-icon"></span>
               <div>
                 <h3>Phone</h3>
                 <p>+91 98765 43210</p>
@@ -663,7 +672,7 @@ body {
             </div>
             
             <div class="contact-item">
-              <span class="contact-icon">✉️</span>
+              <span class="contact-icon"></span>
               <div>
                 <h3>Email</h3>
                 <p>info@laundrymart.com</p>
@@ -671,7 +680,7 @@ body {
             </div>
             
             <div class="contact-item">
-              <span class="contact-icon">🕐</span>
+              <span class="contact-icon"></span>
               <div>
                 <h3>Working Hours</h3>
                 <p>Monday - Saturday: 8AM - 8PM</p>
@@ -683,10 +692,10 @@ body {
           <div class="social-links">
             <h3>Follow Us</h3>
             <div class="social-icons">
-              <a href="#" title="Facebook">📘</a>
-              <a href="#" title="Instagram">📷</a>
-              <a href="#" title="Twitter">🐦</a>
-              <a href="#" title="LinkedIn">💼</a>
+              <a href="#" title="Facebook"></a>
+              <a href="#" title="Instagram"></a>
+              <a href="#" title="Twitter"></a>
+              <a href="#" title="LinkedIn"></a>
             </div>
           </div>
         </div>
@@ -713,7 +722,7 @@ body {
               <textarea id="message" name="message" rows="5" placeholder="How can we help you?" required></textarea>
             </div>
             
-            <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+            <button type="submit" class="cta-btn btn-full">Send Message</button>
           </form>
         </div>
       </div>
@@ -735,7 +744,7 @@ body {
         <a href="/contact" class="btn btn-secondary">Contact Support</a>
       </div>
     </div>
-    <div class="error-icon">🧺❓</div>
+    <div class="error-icon"></div>
   </main> `);
   }
   res.write(`<footer class="footer">
